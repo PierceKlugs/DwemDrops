@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MainHand;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -26,12 +27,13 @@ public class Drops implements Listener {
 
         Drops.add(new ItemStack(Material.BOW, 1));
         ItemMeta ether = Drops.get(0).getItemMeta();
-        ether.setDisplayName("§l§4Ether");
+        ether.setDisplayName("§e§lEther");
         List<String> ether_lore = new ArrayList<String>();
-        ether_lore.add("§l§eLEGENDARY");
+        ether_lore.add("§e§lLEGENDARY");
         ether_lore.add("§eThe Ether has a 10% chance of healing upon hit.");
         ether.setLore(ether_lore);
         ether.setUnbreakable(true);
+        ether.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
         ether.addEnchant(Enchantment.ARROW_DAMAGE,2, false);
         ether.addEnchant(Enchantment.ARROW_KNOCKBACK, 2, false);
         ether.addEnchant(Enchantment.ARROW_INFINITE, 1, false);
