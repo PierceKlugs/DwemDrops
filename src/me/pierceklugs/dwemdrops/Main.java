@@ -10,6 +10,5 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new Drops(), this);
         Bukkit.getServer().getLogger().info("DwemDrops is Online!");
 
-
     }
 }

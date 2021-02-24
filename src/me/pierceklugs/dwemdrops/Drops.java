@@ -78,7 +78,7 @@ public class Drops implements Listener {
 
             //Life Steal Bow
             int chance = rand.nextInt(100);
-            if(chance <= 1){
+            if(chance <= 100){
 
                 entity.getLocation().getWorld().dropItem(death_mark, Drops.get(0));
 
