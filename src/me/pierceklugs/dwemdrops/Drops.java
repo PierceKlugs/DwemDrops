@@ -15,9 +15,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Drops implements Listener {
 
-    public ArrayList<ItemStack> Drops = new ArrayList<ItemStack>();
-
-    public void createDrops(){
+    public ArrayList<ItemStack> createDrops(){
+        ArrayList<ItemStack> Drops = new ArrayList<ItemStack>();
 
         //Ether Bow
         Drops.add(new ItemStack(Material.BOW, 1));
@@ -32,10 +31,14 @@ public class Drops implements Listener {
         ether.addEnchant(Enchantment.ARROW_KNOCKBACK, 2, true);
         ether.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
 
+
+        return Drops;
     }
 
     @EventHandler
     public void etherPower(EntityDamageByEntityEvent event){
+        ArrayList<ItemStack> Drops = createDrops();
+
         Entity mob = event.getEntity();
         Entity damager = event.getDamager();
         Random rand = new Random();
@@ -60,7 +63,7 @@ public class Drops implements Listener {
 
     @EventHandler
     public void onDrop(EntityDeathEvent event){
-
+        ArrayList<ItemStack> Drops = createDrops();
         event.getDrops().clear();
         LivingEntity entity = event.getEntity();
         Player player = event.getEntity().getKiller();
@@ -77,7 +80,7 @@ public class Drops implements Listener {
             int chance = rand.nextInt(100);
             if(chance <= 1){
 
-                entity.getLocation().getWorld().dropItem(death_mark, new ItemStack(Material.BOW, rand.nextInt(2)));
+                entity.getLocation().getWorld().dropItem(death_mark, Drops.get(0));
 
             }
         }
