@@ -1,0 +1,4 @@
+name: DwenDrops
+main: me.pierceklugs.dwemdrops.Main
+version: 1.0
+description: DwemDrops generates random drops for players.
