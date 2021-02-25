@@ -12,11 +12,10 @@ public class Main extends JavaPlugin {
 
     }
     @Override
-    public void onDisable(){
+    public void onDisable() {
 
 
         Bukkit.getServer().getLogger().info("DwemDrops is Offline!");
-
 
     }
 }
