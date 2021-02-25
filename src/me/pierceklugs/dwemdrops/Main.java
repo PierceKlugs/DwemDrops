@@ -8,6 +8,7 @@ public class Main extends JavaPlugin {
     public void onEnable(){
         //Events
         Bukkit.getPluginManager().registerEvents(new Drops(), this);
+        Bukkit.getPluginManager().registerEvents(new DwenLegendary(), this);
 
         //Commands
         this.getCommand("dwenitem").setExecutor(new DwenCommands());

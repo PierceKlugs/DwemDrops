@@ -18,19 +18,19 @@ public class DwenCommands implements CommandExecutor {
 
                     if(args.length == 0) {
 
-                        player.sendMessage("DwenDrops: Incorrect usage, please give an argument.");
+                        player.sendMessage("§7[§7DwenDrops§7]: Incorrect usage, please give an argument.");
                         return true;
 
                     }else if(args.length == 1){
 
-                        ItemStack item = Drops.Drops.get(Integer.parseInt(args[0]));
+                        ItemStack item = DwenLegendary.Drops.get(Integer.parseInt(args[0]));
                         player.getInventory().addItem(item);
-                        player.sendMessage("DwenDrops: " + item.getItemMeta().getDisplayName() + " has been summoned.");
+                        player.sendMessage("§7[§7DwenDrops§7]: " + item.getItemMeta().getDisplayName() + "§7 has been summoned.");
 
                         return true;
                     }else{
 
-                        player.sendMessage("DwenDrops: Incorrect usage, please give an argument.");
+                        player.sendMessage("§7[§7DwenDrops§7]: Incorrect usage, please give an argument.");
 
                         return true;
 
