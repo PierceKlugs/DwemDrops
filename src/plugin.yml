@@ -2,3 +2,10 @@ name: DwenDrops
 main: me.pierceklugs.dwemdrops.Main
 version: 1.0
 description: DwemDrops generates random drops for players.
+
+
+commands:
+  dwenitem:
+    description: Gives the player a DwenDrop item.
+    usage: /<command>
+    permission: dwendrops.summon

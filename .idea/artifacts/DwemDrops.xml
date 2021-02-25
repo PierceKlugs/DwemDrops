@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="DwemDrops">
-    <output-path>$PROJECT_DIR$/../../Spigot Test Server/plugins</output-path>
+    <output-path>D:/Desktop/Bukkit Test/plugins</output-path>
     <root id="archive" name="DwemDrops.jar">
       <element id="module-output" name="DwemDrops" />
     </root>

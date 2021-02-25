@@ -2,7 +2,7 @@ package me.pierceklugs.dwemdrops;
 
 import java.util.*;
 
-import org.bukkit.Effect;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -11,23 +11,23 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.player.PlayerChangedMainHandEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.MainHand;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class Drops implements Listener {
     //Drops List
-    public List<ItemStack> Drops = new ArrayList<ItemStack>();
+    public static List<ItemStack> Drops = new ArrayList<ItemStack>();
+
 
     @EventHandler
     public void createDrops(PluginEnableEvent event){
-        //Ether Bow
+
+        //The Ether
         Drops.add(new ItemStack(Material.BOW, 1));
         ItemMeta ether = Drops.get(0).getItemMeta();
         ether.setDisplayName("§e§lThe Ether");
@@ -48,7 +48,8 @@ public class Drops implements Listener {
         Dwen.setDisplayName("§e§lAxe of Dwen");
         List<String> dwen_lore = new ArrayList<String>();
         dwen_lore.add("§e§lLEGENDARY");
-        dwen_lore.add("§eThe Axe of Dwen grants a speed boost to the holder on right-click.");
+        dwen_lore.add("§eThe Axe of Dwen grants a speed boost to the holder");
+        dwen_lore.add("§eon right-click.");
         Dwen.setLore(dwen_lore);
         Dwen.setUnbreakable(true);
         Dwen.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
@@ -57,7 +58,22 @@ public class Drops implements Listener {
         Dwen.addEnchant(Enchantment.DURABILITY, 5, false);
         Drops.get(1).setItemMeta(Dwen);
 
+        //Xenia
+        Drops.add(new ItemStack(Material.STICK, 1));
+        ItemMeta xenia = Drops.get(2).getItemMeta();
+        xenia.setDisplayName("§e§lXenia");
+        List<String> xenia_lore = new ArrayList<String>();
+        xenia_lore.add("§e§lLEGENDARY");
+        xenia_lore.add("§eXenia uses energy from time and space to");
+        xenia_lore.add("teleport the user to another location.");
+        xenia.setLore(dwen_lore);
+        xenia.setUnbreakable(true);
+        xenia.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+        xenia.addEnchant(Enchantment.KNOCKBACK, 5, false);
+        Drops.get(1).setItemMeta(xenia);
+
     }
+
 
     @EventHandler
     public void etherPower(EntityDamageByEntityEvent event){
@@ -72,7 +88,7 @@ public class Drops implements Listener {
                 Player player = (Player) arrow.getShooter();
                 if(player.getInventory().getItemInMainHand().equals(Drops.get(0))){
                     int chance = rand.nextInt(100);
-                    if(chance <= 100){
+                    if(chance <= 10){
                         if((event.getFinalDamage() + player.getHealth()) >= 20.0){
 
                             player.setHealth(20.0);
@@ -92,21 +108,16 @@ public class Drops implements Listener {
     public void dwenPower(PlayerInteractEvent event){
         Player player = event.getPlayer();
         PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 6000, 2);
-        if(!(player.hasPotionEffect(PotionEffectType.SPEED))) {
-            if (event.getItem().equals(Drops.get(1))) {
+        if(event.getPlayer().getInventory().getItemInMainHand().equals(Drops.get(1)) && !(player.hasPotionEffect(PotionEffectType.SPEED))){
 
                 player.addPotionEffect(speed);
 
-            }
         }
-
-
     }
 
 
     @EventHandler
     public void onDrop(EntityDeathEvent event){
-        event.getDrops().clear();
         LivingEntity entity = event.getEntity();
         Player player = event.getEntity().getKiller();
 
@@ -115,10 +126,6 @@ public class Drops implements Listener {
         //Skeleton Drops
         if(entity instanceof Skeleton){
             Location death_mark = entity.getLocation();
-            entity.getLocation().getWorld().dropItem(death_mark, new ItemStack(Material.BONE, rand.nextInt(1) + 1));
-            entity.getLocation().getWorld().dropItem(death_mark, new ItemStack(Material.BONE, rand.nextInt(2) + 1));
-            entity.getLocation().getWorld().dropItem(death_mark, new ItemStack(Material.ARROW, rand.nextInt(1) + 1));
-
             //Life Steal Bow
             int chance = rand.nextInt(10000);
             if(chance <= 1){
@@ -128,6 +135,7 @@ public class Drops implements Listener {
             }
         }
 
+        //Zombie Drops
         if(entity instanceof Zombie){
             Zombie zombie = (Zombie) entity;
             int chance = rand.nextInt(10000);
@@ -136,14 +144,18 @@ public class Drops implements Listener {
                 event.getEntity().getLocation().getWorld().dropItem(event.getEntity().getLocation(), Drops.get(1));
 
             }
+        }
+
+
+        //TODO:Creeper Drops
+        if(entity instanceof Creeper){
+
+
+
 
 
 
         }
 
-
-
     }
-
-
 }
